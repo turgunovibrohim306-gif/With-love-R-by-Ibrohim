@@ -1,17 +1,17 @@
 <!DOCTYPE html>
-<html>
+<html lang="uz">
 <head>
 <meta charset="UTF-8">
-<title>Love</title>
+<title>Love 💌</title>
 
 <style>
 body{
+margin:0;
+height:100vh;
 display:flex;
 justify-content:center;
 align-items:center;
-height:100vh;
 background:pink;
-margin:0;
 }
 
 .envelope{
@@ -39,24 +39,23 @@ background:white;
 padding:20px;
 }
 </style>
-
 </head>
 
 <body>
 
 <div class="envelope" id="env">
-<div class="flap" id="flap"></div>
+  <div class="flap" id="flap"></div>
 </div>
 
 <div class="letter" id="letter">
-<h3>Salom ❤️</h3>
+  <h3>Salom ❤️ ishladi!</h3>
 </div>
 
 <script>
-document.getElementById("env").onclick = function(){
-document.getElementById("flap").style.transform="rotateX(180deg)";
-document.getElementById("letter").style.display="block";
-}
+document.getElementById("env").addEventListener("click", function(){
+  document.getElementById("flap").style.transform="rotateX(180deg)";
+  document.getElementById("letter").style.display="block";
+});
 </script>
 
 </body>
