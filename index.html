@@ -1,10 +1,119 @@
 <!DOCTYPE html>
-<html>
+<html lang="uz">
 <head>
-<title>Love Letter</title>
+<meta charset="UTF-8">
+<title>Love Letter ❤️</title>
+
+<style>
+body {
+  margin: 0;
+  padding: 0;
+  background: #ffdde1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-family: sans-serif;
+  overflow: hidden;
+}
+
+/* Envelope */
+.envelope {
+  position: relative;
+  width: 300px;
+  height: 200px;
+  background: #ff6b81;
+  cursor: pointer;
+}
+
+.envelope:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 0;
+  height: 0;
+  border-left: 150px solid transparent;
+  border-right: 150px solid transparent;
+  border-bottom: 100px solid #ff4757;
+}
+
+.letter {
+  position: absolute;
+  top: 100%;
+  left: 10px;
+  width: 280px;
+  height: 400px;
+  background: white;
+  padding: 15px;
+  overflow-y: auto;
+  transition: 1s;
+  border-radius: 10px;
+}
+
+/* Open animation */
+.envelope.open .letter {
+  top: -420px;
+}
+
+/* Hearts animation */
+.heart {
+  position: absolute;
+  color: red;
+  animation: float 5s infinite;
+}
+
+@keyframes float {
+  0% { transform: translateY(0); opacity: 1; }
+  100% { transform: translateY(-800px); opacity: 0; }
+}
+</style>
+
 </head>
-<body style="background:#ffe6eb;text-align:center;font-family:Arial;padding-top:100px;">
-<h1>💌 Hayotim...</h1>
-<p>Agar buni ko‘rayotgan bo‘lsang, demak xat seni kutmoqda ❤️</p>
+<body>
+
+<div class="envelope" onclick="openLetter()">
+  <div class="letter">
+
+    <p><b>Hayotim...</b></p>
+
+    <p>Bilmayman bu xatni o‘qigach nima deb o‘ylaysan. Balki jahling hali ham bosilmagandir, balki menga javob ham berishni istamassan. Lekin bitta iltimosim bor: shu xatni oxirigacha o‘qib chiq.</p>
+
+    <p>Oxirgi kunlarda shuni tushundimki, inson o‘zi uchun qadrli bo‘lgan narsani yo‘qotish xavfini his qilmaguncha uning qanchalik muhimligini to‘liq anglamas ekan. Men esa seni yo‘qotishdan qo‘rqayotganimni har kuni his qilyapman.</p>
+
+    <p>Esingdami, biz kelajak haqida qancha gaplashardik? Birga orzu qilardik, maqsadlar qo‘yardik, bir kun kelib hammasiga erishamiz derdik. Men o‘sha orzularning birontasidan ham voz kechganim yo‘q. Faqat ularning barchasida sen bor eding va hozir ham bor.</p>
+
+    <p>Sensiz hayot davom etayotgandek tuyuladi, lekin uning mazmuni yo‘qolgandek. Har kuni nimadir yetishmayotgandek bo‘ladi. Chunki men seni nafaqat sevgilim, balki eng yaqin insonim deb bilaman.</p>
+
+    <p>Men mukammal emasman... chin yuragimdan afsusdaman.</p>
+
+    <p>Men hali ham qo‘lingdan ushlab yurishni, birga kulishni, birga sayohat qilishni orzu qilaman.</p>
+
+    <p>Iltimos, bitta janjal hammasini yo‘q qilmasin...</p>
+
+    <p><b>Seni chin yuragim bilan sevaman ❤️</b></p>
+
+  </div>
+</div>
+
+<script>
+function openLetter() {
+  document.querySelector('.envelope').classList.toggle('open');
+}
+
+/* Hearts generator */
+setInterval(() => {
+  let heart = document.createElement("div");
+  heart.className = "heart";
+  heart.innerHTML = "❤️";
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.fontSize = (10 + Math.random()*20) + "px";
+  document.body.appendChild(heart);
+
+  setTimeout(() => {
+    heart.remove();
+  }, 5000);
+}, 300);
+</script>
+
 </body>
 </html>
