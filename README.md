@@ -1,0 +1,1 @@
+# Bu-xatni-oxirigacha-oqign-
