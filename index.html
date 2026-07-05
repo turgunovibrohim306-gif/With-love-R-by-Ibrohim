@@ -12,40 +12,54 @@ display:flex;
 justify-content:center;
 align-items:center;
 flex-direction:column;
-background:linear-gradient(135deg,#ff9eb5,#ffc0cb);
+background: radial-gradient(circle at top, #ff6f91, #ff4d6d, #1a1a2e);
 font-family: 'Segoe UI', sans-serif;
 overflow:hidden;
+color:white;
 }
 
 /* ENVELOPE */
 .envelope{
-width:180px;
-height:120px;
-background:#ff4d6d;
-border-radius:10px;
+width:220px;
+height:140px;
+background:linear-gradient(135deg,#ff4d6d,#ff6f91);
+border-radius:15px;
 display:flex;
 justify-content:center;
 align-items:center;
-color:white;
-font-size:18px;
+font-size:20px;
 cursor:pointer;
-box-shadow:0 10px 20px rgba(0,0,0,0.2);
+box-shadow:0 20px 40px rgba(0,0,0,0.5);
+transition:0.4s;
+}
+.envelope:hover{
+transform:scale(1.1) rotate(-2deg);
+}
+
+/* OPEN ANIMATION */
+.open{
+animation:openAnim 1s forwards;
+}
+@keyframes openAnim{
+0%{transform:scale(1);}
+100%{transform:scale(0) rotate(10deg);opacity:0;}
 }
 
 /* CARD */
 .box{
 display:none;
 margin-top:20px;
-background:rgba(255,255,255,0.9);
+background:rgba(255,255,255,0.1);
 padding:25px;
 border-radius:15px;
 text-align:center;
-width:320px;
-box-shadow:0 10px 30px rgba(0,0,0,0.2);
-position:relative;
+width:340px;
+box-shadow:0 10px 40px rgba(0,0,0,0.4);
+backdrop-filter: blur(15px);
+animation:fadeIn 0.6s ease;
 }
 
-/* BUTTONS */
+/* BUTTON */
 button{
 padding:10px 20px;
 border:none;
@@ -61,7 +75,7 @@ color:white;
 }
 
 .yoq{
-background:gray;
+background:#333;
 color:white;
 position:absolute;
 }
@@ -70,40 +84,66 @@ position:absolute;
 .result{
 display:none;
 position:absolute;
-bottom:20px;
-background:white;
-padding:20px;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+background:rgba(255,255,255,0.1);
+padding:25px;
 border-radius:15px;
-width:350px;
-height:260px;
+width:90%;
+max-width:450px;
+height:70%;
 overflow:auto;
-box-shadow:0 10px 30px rgba(0,0,0,0.2);
+backdrop-filter: blur(15px);
+box-shadow:0 20px 60px rgba(0,0,0,0.5);
 }
 
+/* TEXT */
 #text{
 white-space:pre-line;
+line-height:1.7;
 }
 
-/* HEARTS */
+/* ANIM */
+@keyframes fadeIn{
+from{opacity:0}
+to{opacity:1}
+}
+
+/* HEART */
 .heart{
 position:absolute;
-animation:float 4s linear infinite;
+animation:float 5s linear infinite;
+}
+@keyframes float{
+0%{transform:translateY(0)}
+100%{transform:translateY(-800px)}
 }
 
-@keyframes float{
-0%{transform:translateY(0);}
-100%{transform:translateY(-500px);}
+/* SPARK */
+.spark{
+position:absolute;
+color:white;
+font-size:10px;
+animation:spark 3s linear infinite;
+}
+@keyframes spark{
+0%{opacity:1;transform:translateY(0)}
+100%{opacity:0;transform:translateY(-300px)}
 }
 </style>
 </head>
 
 <body>
 
-<div class="envelope" onclick="openLetter()">💌 Xatni och</div>
+<audio id="music" autoplay loop>
+<source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3">
+</audio>
+
+<div class="envelope" id="env" onclick="openLetter()">💌 OPEN</div>
 
 <div class="box" id="box">
-<p>Bu xatni oxirigacha o‘qishga va’da berasanmi?</p>
-
+<p>Oxirigacha o‘qiysanmi? ❤️</p>
 <button class="ha" onclick="yes()">Ha ❤️</button>
 <button class="yoq" id="yoq">Yoq 💔</button>
 </div>
@@ -115,17 +155,25 @@ animation:float 4s linear infinite;
 <script>
 
 function openLetter(){
+let e=document.getElementById("env");
+e.classList.add("open");
+
+setTimeout(()=>{
+e.style.display="none";
 document.getElementById("box").style.display="block";
+},800);
+
+document.getElementById("music").play();
 }
 
 /* YOQ qochadi */
 let yoq=document.getElementById("yoq");
 yoq.onmouseover=function(){
-yoq.style.left=Math.random()*250+"px";
-yoq.style.top=Math.random()*150+"px";
+yoq.style.left=Math.random()*300+"px";
+yoq.style.top=Math.random()*200+"px";
 }
 
-/* HA bosilsa */
+/* YES */
 function yes(){
 document.getElementById("box").style.display="none";
 document.getElementById("result").style.display="block";
@@ -150,26 +198,25 @@ Iltimos, bitta janjal biz qurgan his-tuyg‘ularni, orzularni va rejalarning ham
 
 Seni yo‘qotishni istamayman. Chunki sen oddiy inson emassan. Sen mening yuragimdan joy olgan odamsan. Va bilgin, yurakdagi odamni almashtirib bo‘lmaydi.
 
-Nima bo‘lishidan qat'i nazar, seni hurmat qilaman, qadrlayman va chin dildan yaxshi ko‘raman. Umid qilamanki, bir kun bu xatni o‘qib, yana kulib yonma-yon yuradigan kunlarimizni boshlaymiz.
+Nima bo‘lishidan qat'i nazar, seni hurmat qilaman, qadrlayman va chin dildan yaxshi ko‘raman.
 
-Men hali ham bizga ishonaman. Hali ham bizning orzularimizga ishonaman. Va eng muhimi, hali ham senga ishonaman.
-
-Seni chin yuragim bilan sevaman. ❤️`;
+Men hali ham bizga ishonaman... ❤️`;
 
 type(msg);
 hearts();
+sparks();
 }
 
 /* typing */
 function type(t){
 let i=0;
 let el=document.getElementById("text");
-
+el.innerHTML="";
 function write(){
 if(i<t.length){
 el.innerHTML+=t[i];
 i++;
-setTimeout(write,15);
+setTimeout(write,12);
 }
 }
 write();
@@ -184,8 +231,20 @@ h.className="heart";
 h.style.left=Math.random()*100+"vw";
 h.style.fontSize=(Math.random()*20+10)+"px";
 document.body.appendChild(h);
-setTimeout(()=>h.remove(),4000);
-},300);
+setTimeout(()=>h.remove(),5000);
+},250);
+}
+
+/* sparks */
+function sparks(){
+setInterval(()=>{
+let s=document.createElement("div");
+s.innerHTML="✨";
+s.className="spark";
+s.style.left=Math.random()*100+"vw";
+document.body.appendChild(s);
+setTimeout(()=>s.remove(),3000);
+},200);
 }
 
 </script>
