@@ -7,7 +7,6 @@
 <style>
 body {
   margin: 0;
-  padding: 0;
   background: linear-gradient(to top, #ffdde1, #ee9ca7);
   height: 100vh;
   display: flex;
@@ -17,46 +16,55 @@ body {
   overflow: hidden;
 }
 
-/* Envelope */
+/* KONVERT */
 .envelope {
   position: relative;
   width: 300px;
   height: 200px;
   background: #ff6b81;
   cursor: pointer;
-  border-radius: 10px;
 }
 
-.envelope:before {
-  content: "";
+/* QOPQOQ (flap) */
+.flap {
   position: absolute;
-  top: 0;
-  left: 0;
+  width: 0;
+  height: 0;
   border-left: 150px solid transparent;
   border-right: 150px solid transparent;
   border-bottom: 100px solid #ff4757;
+  top: 0;
+  transform-origin: top;
+  transition: 0.8s;
+  z-index: 3;
 }
 
-/* Letter */
+/* OCHILISH */
+.envelope.open .flap {
+  transform: rotateX(180deg);
+}
+
+/* XAT */
 .letter {
   position: absolute;
-  top: 100%;
-  left: 10px;
-  width: 280px;
-  height: 400px;
+  width: 260px;
+  height: 380px;
   background: white;
+  top: 20px;
+  left: 20px;
   padding: 15px;
   overflow-y: auto;
   border-radius: 10px;
+  transform: translateY(0);
   transition: 1s;
+  z-index: 1;
 }
 
-/* Open animation */
 .envelope.open .letter {
-  top: -420px;
+  transform: translateY(-250px);
 }
 
-/* Hearts */
+/* YURAK */
 .heart {
   position: absolute;
   color: red;
@@ -73,27 +81,29 @@ body {
 <body>
 
 <div class="envelope" onclick="openLetter()">
+  
+  <div class="flap"></div>
+
   <div class="letter">
 
 <p><b>Hayotim...</b></p>
 
-<p>Bilmayman bu xatni o‘qigach nima deb o‘ylaysan. Balki jahling hali ham bosilmagandir, balki menga javob ham berishni istamassan. Lekin bitta iltimosim bor: shu xatni oxirigacha o‘qib chiq.</p>
+<p>Bilmayman bu xatni o‘qigach nima deb o‘ylaysan...</p>
 
-<p>Oxirgi kunlarda shuni tushundimki, inson o‘zi uchun qadrli bo‘lgan narsani yo‘qotish xavfini his qilmaguncha uning qanchalik muhimligini to‘liq anglamas ekan. Men esa seni yo‘qotishdan qo‘rqayotganimni har kuni his qilyapman.</p>
+<p>Oxirgi kunlarda shuni tushundimki...</p>
 
-<p>Esingdami, biz kelajak haqida qancha gaplashardik? Birga orzu qilardik, maqsadlar qo‘yardik, bir kun kelib hammasiga erishamiz derdik. Men o‘sha orzularning birontasidan ham voz kechganim yo‘q. Faqat ularning barchasida sen bor eding va hozir ham bor.</p>
+<p>Esingdami, biz kelajak haqida qancha gaplashardik...</p>
 
-<p>Sensiz hayot davom etayotgandek tuyuladi, lekin uning mazmuni yo‘qolgandek. Har kuni nimadir yetishmayotgandek bo‘ladi. Chunki men seni nafaqat sevgilim, balki eng yaqin insonim deb bilaman.</p>
+<p>Sensiz hayot davom etayotgandek tuyuladi...</p>
 
-<p>Men mukammal emasman. Xatolar qilgan bo‘lishim mumkin. Buning uchun chin yuragimdan afsusdaman.</p>
-
-<p>Men hali ham qo‘lingdan ushlab yurishni, birga kulishni, birga sayohat qilishni orzu qilaman.</p>
+<p>Men mukammal emasman...</p>
 
 <p>Iltimos, bitta janjal hammasini yo‘q qilmasin...</p>
 
 <p><b>Seni chin yuragim bilan sevaman ❤️</b></p>
 
   </div>
+
 </div>
 
 <script>
@@ -101,7 +111,7 @@ function openLetter() {
   document.querySelector('.envelope').classList.toggle('open');
 }
 
-/* Hearts animation */
+/* yuraklar */
 setInterval(() => {
   let heart = document.createElement("div");
   heart.className = "heart";
@@ -110,9 +120,7 @@ setInterval(() => {
   heart.style.fontSize = (10 + Math.random()*20) + "px";
   document.body.appendChild(heart);
 
-  setTimeout(() => {
-    heart.remove();
-  }, 5000);
+  setTimeout(() => heart.remove(), 5000);
 }, 300);
 </script>
 
