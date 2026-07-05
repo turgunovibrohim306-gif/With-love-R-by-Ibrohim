@@ -42,6 +42,7 @@ border-radius:15px;
 text-align:center;
 width:320px;
 box-shadow:0 10px 30px rgba(0,0,0,0.2);
+position:relative;
 }
 
 /* BUTTONS */
@@ -74,7 +75,7 @@ background:white;
 padding:20px;
 border-radius:15px;
 width:350px;
-height:250px;
+height:260px;
 overflow:auto;
 box-shadow:0 10px 30px rgba(0,0,0,0.2);
 }
@@ -120,8 +121,8 @@ document.getElementById("box").style.display="block";
 /* YOQ qochadi */
 let yoq=document.getElementById("yoq");
 yoq.onmouseover=function(){
-yoq.style.left=Math.random()*200+"px";
-yoq.style.top=Math.random()*200+"px";
+yoq.style.left=Math.random()*250+"px";
+yoq.style.top=Math.random()*150+"px";
 }
 
 /* HA bosilsa */
@@ -129,7 +130,7 @@ function yes(){
 document.getElementById("box").style.display="none";
 document.getElementById("result").style.display="block";
 
-let msg = ``Hayotim...
+let msg = `Hayotim...
 
 Bilmayman bu xatni o‘qigach nima deb o‘ylaysan. Balki jahling hali ham bosilmagandir, balki menga javob ham berishni istamassan. Lekin bitta iltimosim bor: shu xatni oxirigacha o‘qib chiq.
 
@@ -153,13 +154,13 @@ Nima bo‘lishidan qat'i nazar, seni hurmat qilaman, qadrlayman va chin dildan y
 
 Men hali ham bizga ishonaman. Hali ham bizning orzularimizga ishonaman. Va eng muhimi, hali ham senga ishonaman.
 
-Seni chin yuragim bilan sevaman. ❤️`;`;
+Seni chin yuragim bilan sevaman. ❤️`;
 
 type(msg);
 hearts();
 }
 
-/* typing effect */
+/* typing */
 function type(t){
 let i=0;
 let el=document.getElementById("text");
