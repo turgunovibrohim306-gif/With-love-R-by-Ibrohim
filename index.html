@@ -2,126 +2,214 @@
 <html lang="uz">
 <head>
 <meta charset="UTF-8">
-<title>Hayotim ❤️</title>
+<title>Love 💌</title>
 
 <style>
 body {
-  margin: 0;
-  background: linear-gradient(to top, #ffdde1, #ee9ca7);
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-family: sans-serif;
-  overflow: hidden;
+  margin:0;
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:linear-gradient(135deg,#ff9eb5,#ffc0cb);
+  font-family:sans-serif;
+  overflow:hidden;
 }
 
-/* KONVERT */
-.envelope {
-  position: relative;
-  width: 300px;
-  height: 200px;
-  background: #ff6b81;
-  cursor: pointer;
+.container{
+  position:relative;
+  text-align:center;
 }
 
-/* QOPQOQ (flap) */
-.flap {
-  position: absolute;
-  width: 0;
-  height: 0;
-  border-left: 150px solid transparent;
-  border-right: 150px solid transparent;
-  border-bottom: 100px solid #ff4757;
-  top: 0;
-  transform-origin: top;
-  transition: 0.8s;
-  z-index: 3;
+/* ENVELOPE */
+.envelope{
+  width:260px;
+  height:160px;
+  background:#ff6f91;
+  border-radius:10px;
+  cursor:pointer;
+  position:relative;
 }
 
-/* OCHILISH */
-.envelope.open .flap {
-  transform: rotateX(180deg);
+.flap{
+  position:absolute;
+  width:100%;
+  height:100%;
+  background:#ff8fab;
+  clip-path: polygon(0 0,50% 50%,100% 0);
+  transform-origin:top;
+  transition:0.6s;
 }
 
-/* XAT */
-.letter {
-  position: absolute;
-  width: 260px;
-  height: 380px;
-  background: white;
-  top: 20px;
-  left: 20px;
-  padding: 15px;
-  overflow-y: auto;
-  border-radius: 10px;
-  transform: translateY(0);
-  transition: 1s;
-  z-index: 1;
+.bodyText{
+  position:absolute;
+  width:100%;
+  height:100%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  color:white;
+  font-weight:bold;
 }
 
-.envelope.open .letter {
-  transform: translateY(-250px);
+/* LETTER */
+.letter{
+  display:none;
+  position:absolute;
+  top:20px;
+  left:50%;
+  transform:translateX(-50%);
+  background:white;
+  padding:20px;
+  border-radius:10px;
+  width:250px;
 }
 
-/* YURAK */
-.heart {
-  position: absolute;
-  color: red;
-  animation: float 5s linear infinite;
+button{
+  margin:10px;
+  padding:10px 20px;
+  border:none;
+  border-radius:8px;
+  cursor:pointer;
 }
 
-@keyframes float {
-  0% { transform: translateY(0); opacity: 1; }
-  100% { transform: translateY(-800px); opacity: 0; }
+.yes{
+  background:#ff4d6d;
+  color:white;
+}
+
+.no{
+  position:absolute;
+  background:white;
+  border:2px solid #ff4d6d;
+  color:#ff4d6d;
+}
+
+/* RESULT */
+.result{
+  display:none;
+  position:absolute;
+  top:180px;
+  left:50%;
+  transform:translateX(-50%);
+  width:260px;
+  background:white;
+  padding:20px;
+  border-radius:10px;
+}
+
+/* TYPING */
+#text{
+  border-right:2px solid black;
+  white-space:pre-line;
+}
+
+/* HEARTS */
+.heart{
+  position:absolute;
+  color:red;
+  animation:float 4s linear infinite;
+}
+
+@keyframes float{
+  0%{transform:translateY(0);opacity:1;}
+  100%{transform:translateY(-600px);opacity:0;}
 }
 </style>
 
 </head>
 <body>
 
-<div class="envelope" onclick="openLetter()">
-  
-  <div class="flap"></div>
+<div class="container">
 
-  <div class="letter">
+  <!-- ENVELOPE -->
+  <div class="envelope" onclick="openEnvelope()">
+    <div class="flap" id="flap"></div>
+    <div class="bodyText">To. Rayyona ❤️</div>
+  </div>
 
-<p><b>Hayotim...</b></p>
+  <!-- LETTER -->
+  <div class="letter" id="letter">
+    <h3>Bu xatni oxirigacha o‘qishga vada berasanmi?</h3>
+    <button class="yes" onclick="showLove()">Yes ❤️</button>
+    <button class="no" id="noBtn">No 😢</button>
+  </div>
 
-<p>Bilmayman bu xatni o‘qigach nima deb o‘ylaysan...</p>
-
-<p>Oxirgi kunlarda shuni tushundimki...</p>
-
-<p>Esingdami, biz kelajak haqida qancha gaplashardik...</p>
-
-<p>Sensiz hayot davom etayotgandek tuyuladi...</p>
-
-<p>Men mukammal emasman...</p>
-
-<p>Iltimos, bitta janjal hammasini yo‘q qilmasin...</p>
-
-<p><b>Seni chin yuragim bilan sevaman ❤️</b></p>
-
+  <!-- RESULT -->
+  <div class="result" id="result">
+    <p id="text"></p>
   </div>
 
 </div>
 
 <script>
-function openLetter() {
-  document.querySelector('.envelope').classList.toggle('open');
+function openEnvelope(){
+  document.getElementById("flap").style.transform="rotateX(180deg)";
+  document.getElementById("letter").style.display="block";
 }
 
-/* yuraklar */
-setInterval(() => {
-  let heart = document.createElement("div");
-  heart.className = "heart";
-  heart.innerHTML = "❤️";
-  heart.style.left = Math.random() * 100 + "vw";
-  heart.style.fontSize = (10 + Math.random()*20) + "px";
-  document.body.appendChild(heart);
+// NO qochadi
+const noBtn=document.getElementById("noBtn");
 
-  setTimeout(() => heart.remove(), 5000);
-}, 300);
+noBtn.addEventListener("mouseover",()=>{
+  const x=Math.random()*300-150;
+  const y=Math.random()*200-100;
+  noBtn.style.transform=translate(${x}px,${y}px);
+});
+
+// YES bosilganda
+function showLove(){
+  document.getElementById("letter").style.display="none";
+  document.getElementById("result").style.display="block";
+
+  const message = Hayotim... ❤️
+
+Bilmayman bu xatni o‘qigach nima deysan...
+Lekin bil, har bir so‘zim chin yurakdan.
+
+Sen mening eng katta baxtimsan 💖
+Sening tabassuming — kunimning eng yorug‘ nuri.
+
+Seni chin yuragim bilan sevaman ❤️;
+
+  typeEffect(message);
+  createHearts();
+}
+
+// typing effect
+function typeEffect(text){
+  let i=0;
+  const speed=40;
+  const el=document.getElementById("text");
+
+  function typing(){
+    if(i<text.length){
+      el.innerHTML += text.charAt(i);
+      i++;
+      setTimeout(typing,speed);
+    }
+  }
+  typing();
+}
+
+// hearts animation
+function createHearts(){
+  setInterval(()=>{
+    const heart=document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerHTML="❤️";
+
+    heart.style.left=Math.random()*100+"vw";
+    heart.style.fontSize=(Math.random()*20+10)+"px";
+
+    document.body.appendChild(heart);
+
+    setTimeout(()=>{
+      heart.remove();
+    },4000);
+
+  },300);
+}
 </script>
 
 </body>
