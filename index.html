@@ -2,17 +2,17 @@
 <html lang="uz">
 <head>
 <meta charset="UTF-8">
-<title>Love Letter ❤️</title>
+<title>Hayotim ❤️</title>
 
 <style>
 body {
   margin: 0;
   padding: 0;
-  background: #ffdde1;
+  background: linear-gradient(to top, #ffdde1, #ee9ca7);
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
   font-family: sans-serif;
   overflow: hidden;
 }
@@ -24,19 +24,20 @@ body {
   height: 200px;
   background: #ff6b81;
   cursor: pointer;
+  border-radius: 10px;
 }
 
 .envelope:before {
   content: "";
   position: absolute;
   top: 0;
-  width: 0;
-  height: 0;
+  left: 0;
   border-left: 150px solid transparent;
   border-right: 150px solid transparent;
   border-bottom: 100px solid #ff4757;
 }
 
+/* Letter */
 .letter {
   position: absolute;
   top: 100%;
@@ -46,8 +47,8 @@ body {
   background: white;
   padding: 15px;
   overflow-y: auto;
-  transition: 1s;
   border-radius: 10px;
+  transition: 1s;
 }
 
 /* Open animation */
@@ -55,11 +56,11 @@ body {
   top: -420px;
 }
 
-/* Hearts animation */
+/* Hearts */
 .heart {
   position: absolute;
   color: red;
-  animation: float 5s infinite;
+  animation: float 5s linear infinite;
 }
 
 @keyframes float {
@@ -74,23 +75,23 @@ body {
 <div class="envelope" onclick="openLetter()">
   <div class="letter">
 
-    <p><b>Hayotim...</b></p>
+<p><b>Hayotim...</b></p>
 
-    <p>Bilmayman bu xatni o‘qigach nima deb o‘ylaysan. Balki jahling hali ham bosilmagandir, balki menga javob ham berishni istamassan. Lekin bitta iltimosim bor: shu xatni oxirigacha o‘qib chiq.</p>
+<p>Bilmayman bu xatni o‘qigach nima deb o‘ylaysan. Balki jahling hali ham bosilmagandir, balki menga javob ham berishni istamassan. Lekin bitta iltimosim bor: shu xatni oxirigacha o‘qib chiq.</p>
 
-    <p>Oxirgi kunlarda shuni tushundimki, inson o‘zi uchun qadrli bo‘lgan narsani yo‘qotish xavfini his qilmaguncha uning qanchalik muhimligini to‘liq anglamas ekan. Men esa seni yo‘qotishdan qo‘rqayotganimni har kuni his qilyapman.</p>
+<p>Oxirgi kunlarda shuni tushundimki, inson o‘zi uchun qadrli bo‘lgan narsani yo‘qotish xavfini his qilmaguncha uning qanchalik muhimligini to‘liq anglamas ekan. Men esa seni yo‘qotishdan qo‘rqayotganimni har kuni his qilyapman.</p>
 
-    <p>Esingdami, biz kelajak haqida qancha gaplashardik? Birga orzu qilardik, maqsadlar qo‘yardik, bir kun kelib hammasiga erishamiz derdik. Men o‘sha orzularning birontasidan ham voz kechganim yo‘q. Faqat ularning barchasida sen bor eding va hozir ham bor.</p>
+<p>Esingdami, biz kelajak haqida qancha gaplashardik? Birga orzu qilardik, maqsadlar qo‘yardik, bir kun kelib hammasiga erishamiz derdik. Men o‘sha orzularning birontasidan ham voz kechganim yo‘q. Faqat ularning barchasida sen bor eding va hozir ham bor.</p>
 
-    <p>Sensiz hayot davom etayotgandek tuyuladi, lekin uning mazmuni yo‘qolgandek. Har kuni nimadir yetishmayotgandek bo‘ladi. Chunki men seni nafaqat sevgilim, balki eng yaqin insonim deb bilaman.</p>
+<p>Sensiz hayot davom etayotgandek tuyuladi, lekin uning mazmuni yo‘qolgandek. Har kuni nimadir yetishmayotgandek bo‘ladi. Chunki men seni nafaqat sevgilim, balki eng yaqin insonim deb bilaman.</p>
 
-    <p>Men mukammal emasman... chin yuragimdan afsusdaman.</p>
+<p>Men mukammal emasman. Xatolar qilgan bo‘lishim mumkin. Buning uchun chin yuragimdan afsusdaman.</p>
 
-    <p>Men hali ham qo‘lingdan ushlab yurishni, birga kulishni, birga sayohat qilishni orzu qilaman.</p>
+<p>Men hali ham qo‘lingdan ushlab yurishni, birga kulishni, birga sayohat qilishni orzu qilaman.</p>
 
-    <p>Iltimos, bitta janjal hammasini yo‘q qilmasin...</p>
+<p>Iltimos, bitta janjal hammasini yo‘q qilmasin...</p>
 
-    <p><b>Seni chin yuragim bilan sevaman ❤️</b></p>
+<p><b>Seni chin yuragim bilan sevaman ❤️</b></p>
 
   </div>
 </div>
@@ -100,7 +101,7 @@ function openLetter() {
   document.querySelector('.envelope').classList.toggle('open');
 }
 
-/* Hearts generator */
+/* Hearts animation */
 setInterval(() => {
   let heart = document.createElement("div");
   heart.className = "heart";
