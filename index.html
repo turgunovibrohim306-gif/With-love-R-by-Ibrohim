@@ -2,7 +2,7 @@
 <html lang="uz">
 <head>
 <meta charset="UTF-8">
-<title>Love 💌</title>
+<title>For You ❤️</title>
 
 <style>
 body{
@@ -11,7 +11,7 @@ height:100vh;
 display:flex;
 justify-content:center;
 align-items:center;
-background:pink;
+background:linear-gradient(135deg,#ff9eb5,#ffc0cb);
 font-family:sans-serif;
 overflow:hidden;
 }
@@ -20,33 +20,24 @@ overflow:hidden;
 width:220px;
 height:140px;
 background:#ff4d6d;
-position:relative;
-cursor:pointer;
-border-radius:10px;
 display:flex;
 justify-content:center;
 align-items:center;
 color:white;
-font-weight:bold;
+font-size:20px;
+cursor:pointer;
+border-radius:10px;
 }
 
-.letter{
+.box{
 display:none;
 position:absolute;
 top:200px;
 background:white;
 padding:20px;
-border-radius:10px;
-width:260px;
+border-radius:12px;
+width:300px;
 text-align:center;
-}
-
-button{
-margin:10px;
-padding:10px;
-border:none;
-border-radius:8px;
-cursor:pointer;
 }
 
 .no{
@@ -56,11 +47,17 @@ position:absolute;
 .result{
 display:none;
 position:absolute;
-top:200px;
+top:180px;
 background:white;
 padding:20px;
-border-radius:10px;
-width:260px;
+border-radius:12px;
+width:320px;
+height:300px;
+overflow:auto;
+}
+
+#text{
+white-space:pre-line;
 }
 
 .heart{
@@ -70,19 +67,19 @@ animation:float 4s linear infinite;
 
 @keyframes float{
 0%{transform:translateY(0);}
-100%{transform:translateY(-400px);}
+100%{transform:translateY(-500px);}
 }
 </style>
 </head>
 
 <body>
 
-<div class="envelope" id="env">💌 OPEN</div>
+<div class="envelope" onclick="openLetter()">💌 OPEN</div>
 
-<div class="letter" id="letter">
-<p>Oxirigacha o‘qishga va’da berasanmi?</p>
+<div class="box" id="box">
+<p>Bu xatni oxirigacha o‘qishga va’da berasanmi?</p>
 <button onclick="yes()">Yes ❤️</button>
-<button class="no" id="noBtn">No 😅</button>
+<button class="no" id="no">No 😅</button>
 </div>
 
 <div class="result" id="result">
@@ -91,50 +88,59 @@ animation:float 4s linear infinite;
 
 <script>
 
-// KONVERT BOSILGANDA
-document.getElementById("env").onclick = function(){
-document.getElementById("letter").style.display="block";
-};
+function openLetter(){
+document.getElementById("box").style.display="block";
+}
 
-// NO QOCHADI
-let no = document.getElementById("noBtn");
-no.onmouseover = function(){
-no.style.left = Math.random()*200 + "px";
-no.style.top = Math.random()*100 + "px";
-};
+let no=document.getElementById("no");
+no.onmouseover=function(){
+no.style.left=Math.random()*200+"px";
+no.style.top=Math.random()*150+"px";
+}
 
-// YES BOSILSA
 function yes(){
-document.getElementById("letter").style.display="none";
+document.getElementById("box").style.display="none";
 document.getElementById("result").style.display="block";
 
-let text = "Hayotim ❤️\n\nSeni juda qattiq sevaman 💖";
-type(text);
+let msg = `Hayotim...
+
+Bilmayman bu xatni o‘qigach nima deb o‘ylaysan. Balki jahling hali ham bosilmagandir...
+
+Men seni yo‘qotishdan qo‘rqyapman.
+
+Sensiz hayotimda nimadir yetishmaydi...
+
+Men mukammal emasman... lekin seni chin yuragimdan sevaman ❤️
+
+Iltimos yana bir imkon ber...
+
+Men hali ham bizga ishonaman ❤️`;
+
+type(msg);
 hearts();
 }
 
-// TYPING
 function type(t){
 let i=0;
 let el=document.getElementById("text");
 
 function write(){
 if(i<t.length){
-el.innerHTML += t[i];
+el.innerHTML+=t[i];
 i++;
-setTimeout(write,30);
+setTimeout(write,25);
 }
 }
 write();
 }
 
-// HEART
 function hearts(){
 setInterval(()=>{
 let h=document.createElement("div");
 h.innerHTML="❤️";
 h.className="heart";
 h.style.left=Math.random()*100+"vw";
+h.style.fontSize=(Math.random()*20+10)+"px";
 document.body.appendChild(h);
 setTimeout(()=>h.remove(),4000);
 },300);
