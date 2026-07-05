@@ -2,6 +2,7 @@
 <html lang="uz">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>For You ❤️</title>
 
 <style>
@@ -12,16 +13,16 @@ display:flex;
 justify-content:center;
 align-items:center;
 flex-direction:column;
-background:#0d0d1a;
+background:linear-gradient(135deg,#ff4d6d,#1a1a2e);
 font-family:sans-serif;
-overflow:hidden;
 color:white;
+overflow:hidden;
 }
 
-/* ENVELOPE */
 .envelope{
-width:220px;
-height:140px;
+width:70%;
+max-width:220px;
+height:130px;
 background:#ff4d6d;
 border-radius:15px;
 display:flex;
@@ -29,20 +30,19 @@ justify-content:center;
 align-items:center;
 font-size:20px;
 cursor:pointer;
-box-shadow:0 10px 40px rgba(0,0,0,0.5);
 }
 
-/* BOX */
 .box{
 display:none;
+margin-top:20px;
 background:rgba(255,255,255,0.1);
-padding:25px;
+padding:20px;
 border-radius:15px;
 text-align:center;
-margin-top:20px;
+width:85%;
+max-width:320px;
 }
 
-/* RESULT */
 .result{
 display:none;
 position:absolute;
@@ -50,7 +50,7 @@ top:50%;
 left:50%;
 transform:translate(-50%,-50%);
 width:90%;
-max-width:450px;
+max-width:420px;
 height:70%;
 overflow:auto;
 background:rgba(255,255,255,0.1);
@@ -58,21 +58,21 @@ padding:20px;
 border-radius:15px;
 }
 
-/* BUTTON */
 button{
-padding:10px 20px;
-margin:10px;
+padding:10px 18px;
+margin:8px;
 border:none;
 border-radius:10px;
 cursor:pointer;
 }
-.ha{background:#ff4d6d;color:white;}
-.yoq{background:#333;color:white;position:absolute;}
 
-/* TEXT */
+.ha{background:#ff4d6d;color:white;}
+.yoq{background:#333;color:white;}
+
 #text{
+font-size:16px;
 line-height:1.6;
-font-size:17px;
+white-space:pre-line;
 }
 </style>
 </head>
@@ -88,7 +88,7 @@ font-size:17px;
 <div class="box" id="box">
 <p>Oxirigacha o‘qiysanmi? ❤️</p>
 <button class="ha" onclick="yes()">Ha ❤️</button>
-<button class="yoq" id="yoq">Yoq 💔</button>
+<button class="yoq" onclick="moveBtn(this)">Yoq 💔</button>
 </div>
 
 <div class="result" id="result">
@@ -97,49 +97,58 @@ font-size:17px;
 
 <script>
 
-/* MUSIC FIX (ENG MUHIM) */
-function playMusic(){
-let m=document.getElementById("music");
-m.currentTime = 0;
-m.play().catch(()=>{});
-}
-
-/* OPEN */
 function openLetter(){
-playMusic(); // 🔥 shu ishlaydi
-document.getElementById("box").style.display="block";
+document.getElementById("music").play().catch(()=>{});
 document.querySelector(".envelope").style.display="none";
+document.getElementById("box").style.display="block";
 }
 
-/* YOQ qochadi */
-let yoq=document.getElementById("yoq");
-yoq.onmouseover=function(){
-yoq.style.left=Math.random()*300+"px";
-yoq.style.top=Math.random()*200+"px";
+function moveBtn(btn){
+btn.style.transform = `translate(${Math.random()*80}px, ${Math.random()*80}px)`;
 }
 
-/* YES */
 function yes(){
 document.getElementById("box").style.display="none";
 document.getElementById("result").style.display="block";
 
 let msg = `Hayotim...
 
-Men seni yo‘qotishni istamayman.
-Men hali ham bizga ishonaman... ❤️`;
+Bilmayman bu xatni o‘qigach nima deb o‘ylaysan. Balki jahling hali ham bosilmagandir, balki menga javob ham berishni istamassan. Lekin bitta iltimosim bor: shu xatni oxirigacha o‘qib chiq.
+
+Oxirgi kunlarda shuni tushundimki, inson o‘zi uchun qadrli bo‘lgan narsani yo‘qotish xavfini his qilmaguncha uning qanchalik muhimligini to‘liq anglamas ekan. Men esa seni yo‘qotishdan qo‘rqayotganimni har kuni his qilyapman.
+
+Esingdami, biz kelajak haqida qancha gaplashardik? Birga orzu qilardik, maqsadlar qo‘yardik, bir kun kelib hammasiga erishamiz derdik. Men o‘sha orzularning birontasidan ham voz kechganim yo‘q. Faqat ularning barchasida sen bor eding va hozir ham bor.
+
+Sensiz hayot davom etayotgandek tuyuladi, lekin uning mazmuni yo‘qolgandek. Har kuni nimadir yetishmayotgandek bo‘ladi. Chunki men seni nafaqat sevgilim, balki eng yaqin insonim deb bilaman.
+
+Men mukammal emasman. Xatolar qilgan bo‘lishim mumkin. Balki seni ranjitgan gaplarim yoki harakatlarim bo‘lgandir. Buning uchun chin yuragimdan afsusdaman. Hech qachon seni hafa qilishni istamaganman. Agar vaqtni ortga qaytara olganimda, seni ranjitadigan birorta ish qilmasdim.
+
+Men boylikni ham, mashhurlikni ham, muvaffaqiyatni ham xohlayman. Lekin bularning hammasiga erishsam-u, yonimda sen bo‘lmasang, ularning qiymati men uchun juda kamayadi. Chunki baxtni men doim sen bilan bog‘laganman.
+
+Men hali ham qo‘lingdan ushlab yurishni, birga kulishni, birga sayohat qilishni, bir-birimizni har qanday vaziyatda qo‘llab-quvvatlashni va kelajakda "biz uddaladik" deb faxr bilan aytishni orzu qilaman.
+
+Iltimos, bitta janjal biz qurgan his-tuyg‘ularni, orzularni va rejalarning hammasini yo‘q qilib yubormasin. Bir-birimizni tushunishga yana bir imkon beraylik. Men o‘z ustimda ishlashga, xatolarimni to‘g‘rilashga va seni yanada ko‘proq qadrlashga tayyorman.
+
+Seni yo‘qotishni istamayman. Chunki sen oddiy inson emassan. Sen mening yuragimdan joy olgan odamsan. Va bilgin, yurakdagi odamni almashtirib bo‘lmaydi.
+
+Nima bo‘lishidan qat'i nazar, seni hurmat qilaman, qadrlayman va chin dildan yaxshi ko‘raman. Umid qilamanki, bir kun bu xatni o‘qib, yana kulib yonma-yon yuradigan kunlarimizni boshlaymiz.
+
+Men hali ham bizga ishonaman. Hali ham bizning orzularimizga ishonaman. Va eng muhimi, hali ham senga ishonaman.
+
+Seni chin yuragim bilan sevaman. ❤️`;
 
 type(msg);
 }
 
-/* TYPE */
 function type(t){
 let i=0;
 let el=document.getElementById("text");
+el.innerHTML="";
 function write(){
 if(i<t.length){
 el.innerHTML+=t[i];
 i++;
-setTimeout(write,15);
+setTimeout(write,18);
 }
 }
 write();
