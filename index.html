@@ -11,105 +11,77 @@ height:100vh;
 display:flex;
 justify-content:center;
 align-items:center;
-background:linear-gradient(135deg,#ff9eb5,#ffc0cb);
+background:pink;
 font-family:sans-serif;
 overflow:hidden;
 }
 
-.container{
-text-align:center;
-position:relative;
-}
-
-/* ENVELOPE */
 .envelope{
 width:220px;
-height:130px;
+height:140px;
 background:#ff4d6d;
 position:relative;
 cursor:pointer;
 border-radius:10px;
+display:flex;
+justify-content:center;
+align-items:center;
+color:white;
+font-weight:bold;
 }
 
-.flap{
-position:absolute;
-width:100%;
-height:100%;
-background:#ff758f;
-clip-path: polygon(0 0,50% 50%,100% 0);
-transition:0.6s;
-transform-origin:top;
-}
-
-/* QUESTION */
 .letter{
 display:none;
 position:absolute;
-top:150px;
-left:50%;
-transform:translateX(-50%);
+top:200px;
 background:white;
 padding:20px;
 border-radius:10px;
 width:260px;
+text-align:center;
 }
 
 button{
 margin:10px;
-padding:10px 15px;
+padding:10px;
 border:none;
 border-radius:8px;
 cursor:pointer;
-font-size:16px;
 }
-
-.yes{background:#ff4d6d;color:white;}
 
 .no{
 position:absolute;
 }
 
-/* RESULT */
 .result{
 display:none;
 position:absolute;
-top:150px;
-left:50%;
-transform:translateX(-50%);
+top:200px;
 background:white;
 padding:20px;
 border-radius:10px;
 width:260px;
 }
 
-#text{
-white-space:pre-line;
-}
-
-/* HEARTS */
 .heart{
 position:absolute;
 animation:float 4s linear infinite;
 }
 
 @keyframes float{
-0%{transform:translateY(0);opacity:1;}
-100%{transform:translateY(-500px);opacity:0;}
+0%{transform:translateY(0);}
+100%{transform:translateY(-400px);}
 }
 </style>
 </head>
 
 <body>
 
-<div class="container">
-
-<div class="envelope" id="env">
-<div class="flap" id="flap"></div>
-</div>
+<div class="envelope" id="env">💌 OPEN</div>
 
 <div class="letter" id="letter">
-<h3>Bu xatni oxirigacha o‘qishga va’da berasanmi?</h3>
-<button class="yes" id="yesBtn">Yes ❤️</button>
+<p>Oxirigacha o‘qishga va’da berasanmi?</p>
+<button onclick="yes()">Yes ❤️</button>
 <button class="no" id="noBtn">No 😅</button>
 </div>
 
@@ -117,71 +89,55 @@ animation:float 4s linear infinite;
 <p id="text"></p>
 </div>
 
-</div>
-
 <script>
 
-// ENVELOPE OPEN
-document.getElementById("env").addEventListener("click", ()=>{
-document.getElementById("flap").style.transform="rotateX(180deg)";
-setTimeout(()=>{
+// KONVERT BOSILGANDA
+document.getElementById("env").onclick = function(){
 document.getElementById("letter").style.display="block";
-},300);
-});
+};
 
-// NO BUTTON QOCHADI
-const noBtn = document.getElementById("noBtn");
+// NO QOCHADI
+let no = document.getElementById("noBtn");
+no.onmouseover = function(){
+no.style.left = Math.random()*200 + "px";
+no.style.top = Math.random()*100 + "px";
+};
 
-noBtn.addEventListener("mouseover", ()=>{
-noBtn.style.left = Math.random()*200 + "px";
-noBtn.style.top = Math.random()*100 + "px";
-});
-
-// YES CLICK
-document.getElementById("yesBtn").onclick = ()=>{
+// YES BOSILSA
+function yes(){
 document.getElementById("letter").style.display="none";
 document.getElementById("result").style.display="block";
 
-const msg = Hayotim ❤️
+let text = "Hayotim ❤️\n\nSeni juda qattiq sevaman 💖";
+type(text);
+hearts();
+}
 
-Bilmayman bu xatni o‘qigach nima deb o‘ylaysan...
-Lekin seni yo‘qotishni istamayman 💔
-
-Seni juda qattiq sevaman ❤️;
-
-typeText(msg);
-startHearts();
-};
-
-// TYPING EFFECT
-function typeText(text){
-let i = 0;
-const el = document.getElementById("text");
+// TYPING
+function type(t){
+let i=0;
+let el=document.getElementById("text");
 
 function write(){
-if(i < text.length){
-el.innerHTML += text[i];
+if(i<t.length){
+el.innerHTML += t[i];
 i++;
-setTimeout(write, 35);
+setTimeout(write,30);
 }
 }
 write();
 }
 
-// HEART ANIMATION
-function startHearts(){
+// HEART
+function hearts(){
 setInterval(()=>{
-const heart = document.createElement("div");
-heart.className = "heart";
-heart.innerHTML = "❤️";
-
-heart.style.left = Math.random()*100 + "vw";
-heart.style.fontSize = (Math.random()*20 + 10) + "px";
-
-document.body.appendChild(heart);
-
-setTimeout(()=>heart.remove(),4000);
-},250);
+let h=document.createElement("div");
+h.innerHTML="❤️";
+h.className="heart";
+h.style.left=Math.random()*100+"vw";
+document.body.appendChild(h);
+setTimeout(()=>h.remove(),4000);
+},300);
 }
 
 </script>
