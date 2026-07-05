@@ -47,12 +47,12 @@ position:absolute;
 .result{
 display:none;
 position:absolute;
-top:180px;
+top:150px;
 background:white;
 padding:20px;
 border-radius:12px;
-width:320px;
-height:300px;
+width:350px;
+height:350px;
 overflow:auto;
 }
 
@@ -104,17 +104,29 @@ document.getElementById("result").style.display="block";
 
 let msg = `Hayotim...
 
-Bilmayman bu xatni o‘qigach nima deb o‘ylaysan. Balki jahling hali ham bosilmagandir...
+Bilmayman bu xatni o‘qigach nima deb o‘ylaysan. Balki jahling hali ham bosilmagandir, balki menga javob ham berishni istamassan. Lekin bitta iltimosim bor: shu xatni oxirigacha o‘qib chiq.
 
-Men seni yo‘qotishdan qo‘rqyapman.
+Oxirgi kunlarda shuni tushundimki, inson o‘zi uchun qadrli bo‘lgan narsani yo‘qotish xavfini his qilmaguncha uning qanchalik muhimligini to‘liq anglamas ekan. Men esa seni yo‘qotishdan qo‘rqayotganimni har kuni his qilyapman.
 
-Sensiz hayotimda nimadir yetishmaydi...
+Esingdami, biz kelajak haqida qancha gaplashardik? Birga orzu qilardik, maqsadlar qo‘yardik, bir kun kelib hammasiga erishamiz derdik. Men o‘sha orzularning birontasidan ham voz kechganim yo‘q. Faqat ularning barchasida sen bor eding va hozir ham bor.
 
-Men mukammal emasman... lekin seni chin yuragimdan sevaman ❤️
+Sensiz hayot davom etayotgandek tuyuladi, lekin uning mazmuni yo‘qolgandek. Har kuni nimadir yetishmayotgandek bo‘ladi. Chunki men seni nafaqat sevgilim, balki eng yaqin insonim deb bilaman.
 
-Iltimos yana bir imkon ber...
+Men mukammal emasman. Xatolar qilgan bo‘lishim mumkin. Balki seni ranjitgan gaplarim yoki harakatlarim bo‘lgandir. Buning uchun chin yuragimdan afsusdaman. Hech qachon seni hafa qilishni istamaganman. Agar vaqtni ortga qaytara olganimda, seni ranjitadigan birorta ish qilmasdim.
 
-Men hali ham bizga ishonaman ❤️`;
+Men boylikni ham, mashhurlikni ham, muvaffaqiyatni ham xohlayman. Lekin bularning hammasiga erishsam-u, yonimda sen bo‘lmasang, ularning qiymati men uchun juda kamayadi. Chunki baxtni men doim sen bilan bog‘laganman.
+
+Men hali ham qo‘lingdan ushlab yurishni, birga kulishni, birga sayohat qilishni, bir-birimizni har qanday vaziyatda qo‘llab-quvvatlashni va kelajakda "biz uddaladik" deb faxr bilan aytishni orzu qilaman.
+
+Iltimos, bitta janjal biz qurgan his-tuyg‘ularni, orzularni va rejalarning hammasini yo‘q qilib yubormasin. Bir-birimizni tushunishga yana bir imkon beraylik. Men o‘z ustimda ishlashga, xatolarimni to‘g‘rilashga va seni yanada ko‘proq qadrlashga tayyorman.
+
+Seni yo‘qotishni istamayman. Chunki sen oddiy inson emassan. Sen mening yuragimdan joy olgan odamsan. Va bilgin, yurakdagi odamni almashtirib bo‘lmaydi.
+
+Nima bo‘lishidan qat'i nazar, seni hurmat qilaman, qadrlayman va chin dildan yaxshi ko‘raman. Umid qilamanki, bir kun bu xatni o‘qib, yana kulib yonma-yon yuradigan kunlarimizni boshlaymiz.
+
+Men hali ham bizga ishonaman. Hali ham bizning orzularimizga ishonaman. Va eng muhimi, hali ham senga ishonaman.
+
+Seni chin yuragim bilan sevaman. ❤️`;
 
 type(msg);
 hearts();
@@ -128,7 +140,7 @@ function write(){
 if(i<t.length){
 el.innerHTML+=t[i];
 i++;
-setTimeout(write,25);
+setTimeout(write,15);
 }
 }
 write();
@@ -143,7 +155,7 @@ h.style.left=Math.random()*100+"vw";
 h.style.fontSize=(Math.random()*20+10)+"px";
 document.body.appendChild(h);
 setTimeout(()=>h.remove(),4000);
-},300);
+},250);
 }
 
 </script>
