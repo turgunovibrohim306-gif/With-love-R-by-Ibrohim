@@ -2,7 +2,6 @@
 <html lang="uz">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>For You ❤️</title>
 
 <style>
@@ -13,82 +12,140 @@ display:flex;
 justify-content:center;
 align-items:center;
 flex-direction:column;
-background:linear-gradient(135deg,#ff4d6d,#1a1a2e);
-font-family:sans-serif;
-color:white;
+background: radial-gradient(circle at top, #ff6f91, #ff4d6d, #1a1a2e);
+font-family: 'Segoe UI', sans-serif;
 overflow:hidden;
+color:white;
 }
 
+/* ENVELOPE */
 .envelope{
-width:70%;
-max-width:220px;
-height:130px;
-background:#ff4d6d;
+width:220px;
+height:140px;
+background:linear-gradient(135deg,#ff4d6d,#ff6f91);
 border-radius:15px;
 display:flex;
 justify-content:center;
 align-items:center;
 font-size:20px;
 cursor:pointer;
+box-shadow:0 20px 40px rgba(0,0,0,0.5);
+transition:0.4s;
+}
+.envelope:hover{
+transform:scale(1.1) rotate(-2deg);
 }
 
+/* OPEN ANIMATION */
+.open{
+animation:openAnim 1s forwards;
+}
+@keyframes openAnim{
+0%{transform:scale(1);}
+100%{transform:scale(0) rotate(10deg);opacity:0;}
+}
+
+/* CARD */
 .box{
 display:none;
 margin-top:20px;
 background:rgba(255,255,255,0.1);
-padding:20px;
+padding:25px;
 border-radius:15px;
 text-align:center;
-width:85%;
-max-width:320px;
+width:340px;
+box-shadow:0 10px 40px rgba(0,0,0,0.4);
+backdrop-filter: blur(15px);
+animation:fadeIn 0.6s ease;
 }
 
+/* BUTTON */
+button{
+padding:10px 20px;
+border:none;
+border-radius:10px;
+margin:10px;
+font-size:16px;
+cursor:pointer;
+}
+
+.ha{
+background:#ff4d6d;
+color:white;
+}
+
+.yoq{
+background:#333;
+color:white;
+position:absolute;
+}
+
+/* RESULT */
 .result{
 display:none;
 position:absolute;
 top:50%;
 left:50%;
 transform:translate(-50%,-50%);
+background:rgba(255,255,255,0.1);
+padding:25px;
+border-radius:15px;
 width:90%;
-max-width:420px;
+max-width:450px;
 height:70%;
 overflow:auto;
-background:rgba(255,255,255,0.1);
-padding:20px;
-border-radius:15px;
+backdrop-filter: blur(15px);
+box-shadow:0 20px 60px rgba(0,0,0,0.5);
 }
 
-button{
-padding:10px 18px;
-margin:8px;
-border:none;
-border-radius:10px;
-cursor:pointer;
-}
-
-.ha{background:#ff4d6d;color:white;}
-.yoq{background:#333;color:white;}
-
+/* TEXT */
 #text{
-font-size:16px;
-line-height:1.6;
 white-space:pre-line;
+line-height:1.7;
+}
+
+/* ANIM */
+@keyframes fadeIn{
+from{opacity:0}
+to{opacity:1}
+}
+
+/* HEART */
+.heart{
+position:absolute;
+animation:float 5s linear infinite;
+}
+@keyframes float{
+0%{transform:translateY(0)}
+100%{transform:translateY(-800px)}
+}
+
+/* SPARK */
+.spark{
+position:absolute;
+color:white;
+font-size:10px;
+animation:spark 3s linear infinite;
+}
+@keyframes spark{
+0%{opacity:1;transform:translateY(0)}
+100%{opacity:0;transform:translateY(-300px)}
 }
 </style>
 </head>
 
 <body>
 
-<audio id="music" loop>
+<audio id="music" autoplay loop>
 <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3">
 </audio>
 
-<div class="envelope" onclick="openLetter()">💌 OPEN</div>
+<div class="envelope" id="env" onclick="openLetter()">💌 OPEN</div>
 
 <div class="box" id="box">
 <p>Oxirigacha o‘qiysanmi? ❤️</p>
 <button class="ha" onclick="yes()">Ha ❤️</button>
-<button class="yoq" onclick="moveBtn(this)">Yoq 💔</button>
+<button class="yoq" id="yoq">Yoq 💔</button>
 </div>
 
 <div class="result" id="result">
@@ -98,15 +155,25 @@ white-space:pre-line;
 <script>
 
 function openLetter(){
-document.getElementById("music").play().catch(()=>{});
-document.querySelector(".envelope").style.display="none";
+let e=document.getElementById("env");
+e.classList.add("open");
+
+setTimeout(()=>{
+e.style.display="none";
 document.getElementById("box").style.display="block";
+},800);
+
+document.getElementById("music").play();
 }
 
-function moveBtn(btn){
-btn.style.transform = `translate(${Math.random()*80}px, ${Math.random()*80}px)`;
+/* YOQ qochadi */
+let yoq=document.getElementById("yoq");
+yoq.onmouseover=function(){
+yoq.style.left=Math.random()*300+"px";
+yoq.style.top=Math.random()*200+"px";
 }
 
+/* YES */
 function yes(){
 document.getElementById("box").style.display="none";
 document.getElementById("result").style.display="block";
@@ -131,15 +198,16 @@ Iltimos, bitta janjal biz qurgan his-tuyg‘ularni, orzularni va rejalarning ham
 
 Seni yo‘qotishni istamayman. Chunki sen oddiy inson emassan. Sen mening yuragimdan joy olgan odamsan. Va bilgin, yurakdagi odamni almashtirib bo‘lmaydi.
 
-Nima bo‘lishidan qat'i nazar, seni hurmat qilaman, qadrlayman va chin dildan yaxshi ko‘raman. Umid qilamanki, bir kun bu xatni o‘qib, yana kulib yonma-yon yuradigan kunlarimizni boshlaymiz.
+Nima bo‘lishidan qat'i nazar, seni hurmat qilaman, qadrlayman va chin dildan yaxshi ko‘raman.
 
-Men hali ham bizga ishonaman. Hali ham bizning orzularimizga ishonaman. Va eng muhimi, hali ham senga ishonaman.
-
-Seni chin yuragim bilan sevaman. ❤️`;
+Men hali ham bizga ishonaman... ❤️`;
 
 type(msg);
+hearts();
+sparks();
 }
 
+/* typing */
 function type(t){
 let i=0;
 let el=document.getElementById("text");
@@ -148,10 +216,35 @@ function write(){
 if(i<t.length){
 el.innerHTML+=t[i];
 i++;
-setTimeout(write,18);
+setTimeout(write,12);
 }
 }
 write();
+}
+
+/* hearts */
+function hearts(){
+setInterval(()=>{
+let h=document.createElement("div");
+h.innerHTML="❤️";
+h.className="heart";
+h.style.left=Math.random()*100+"vw";
+h.style.fontSize=(Math.random()*20+10)+"px";
+document.body.appendChild(h);
+setTimeout(()=>h.remove(),5000);
+},250);
+}
+
+/* sparks */
+function sparks(){
+setInterval(()=>{
+let s=document.createElement("div");
+s.innerHTML="✨";
+s.className="spark";
+s.style.left=Math.random()*100+"vw";
+document.body.appendChild(s);
+setTimeout(()=>s.remove(),3000);
+},200);
 }
 
 </script>
