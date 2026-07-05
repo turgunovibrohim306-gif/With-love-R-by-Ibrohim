@@ -11,55 +11,79 @@ height:100vh;
 display:flex;
 justify-content:center;
 align-items:center;
+flex-direction:column;
 background:linear-gradient(135deg,#ff9eb5,#ffc0cb);
-font-family:sans-serif;
+font-family: 'Segoe UI', sans-serif;
 overflow:hidden;
 }
 
+/* ENVELOPE */
 .envelope{
-width:220px;
-height:140px;
+width:180px;
+height:120px;
 background:#ff4d6d;
+border-radius:10px;
 display:flex;
 justify-content:center;
 align-items:center;
 color:white;
-font-size:20px;
+font-size:18px;
 cursor:pointer;
-border-radius:10px;
+box-shadow:0 10px 20px rgba(0,0,0,0.2);
 }
 
+/* CARD */
 .box{
 display:none;
-position:absolute;
-top:200px;
-background:white;
-padding:20px;
-border-radius:12px;
-width:300px;
+margin-top:20px;
+background:rgba(255,255,255,0.9);
+padding:25px;
+border-radius:15px;
 text-align:center;
+width:320px;
+box-shadow:0 10px 30px rgba(0,0,0,0.2);
 }
 
-.no{
+/* BUTTONS */
+button{
+padding:10px 20px;
+border:none;
+border-radius:10px;
+margin:10px;
+font-size:16px;
+cursor:pointer;
+}
+
+.ha{
+background:#ff4d6d;
+color:white;
+}
+
+.yoq{
+background:gray;
+color:white;
 position:absolute;
 }
 
+/* RESULT */
 .result{
 display:none;
 position:absolute;
-top:150px;
+bottom:20px;
 background:white;
 padding:20px;
-border-radius:12px;
+border-radius:15px;
 width:350px;
-height:350px;
+height:250px;
 overflow:auto;
+box-shadow:0 10px 30px rgba(0,0,0,0.2);
 }
 
 #text{
 white-space:pre-line;
 }
 
+/* HEARTS */
 .heart{
 position:absolute;
 animation:float 4s linear infinite;
@@ -74,12 +98,13 @@ animation:float 4s linear infinite;
 
 <body>
 
-<div class="envelope" onclick="openLetter()">💌 OPEN</div>
+<div class="envelope" onclick="openLetter()">💌 Xatni och</div>
 
 <div class="box" id="box">
 <p>Bu xatni oxirigacha o‘qishga va’da berasanmi?</p>
-<button onclick="yes()">ha </button>
-<button class="no" id="no">yoq </button>
+
+<button class="ha" onclick="yes()">Ha ❤️</button>
+<button class="yoq" id="yoq">Yoq 💔</button>
 </div>
 
 <div class="result" id="result">
@@ -92,17 +117,19 @@ function openLetter(){
 document.getElementById("box").style.display="block";
 }
 
-let no=document.getElementById("no");
-no.onmouseover=function(){
-no.style.left=Math.random()*200+"px";
-no.style.top=Math.random()*150+"px";
+/* YOQ qochadi */
+let yoq=document.getElementById("yoq");
+yoq.onmouseover=function(){
+yoq.style.left=Math.random()*200+"px";
+yoq.style.top=Math.random()*200+"px";
 }
 
+/* HA bosilsa */
 function yes(){
 document.getElementById("box").style.display="none";
 document.getElementById("result").style.display="block";
 
-let msg = `Hayotim...
+let msg = ``Hayotim...
 
 Bilmayman bu xatni o‘qigach nima deb o‘ylaysan. Balki jahling hali ham bosilmagandir, balki menga javob ham berishni istamassan. Lekin bitta iltimosim bor: shu xatni oxirigacha o‘qib chiq.
 
@@ -126,12 +153,13 @@ Nima bo‘lishidan qat'i nazar, seni hurmat qilaman, qadrlayman va chin dildan y
 
 Men hali ham bizga ishonaman. Hali ham bizning orzularimizga ishonaman. Va eng muhimi, hali ham senga ishonaman.
 
-Seni chin yuragim bilan sevaman. ❤️`;
+Seni chin yuragim bilan sevaman. ❤️`;`;
 
 type(msg);
 hearts();
 }
 
+/* typing effect */
 function type(t){
 let i=0;
 let el=document.getElementById("text");
@@ -146,6 +174,7 @@ setTimeout(write,15);
 write();
 }
 
+/* hearts */
 function hearts(){
 setInterval(()=>{
 let h=document.createElement("div");
@@ -155,7 +184,7 @@ h.style.left=Math.random()*100+"vw";
 h.style.fontSize=(Math.random()*20+10)+"px";
 document.body.appendChild(h);
 setTimeout(()=>h.remove(),4000);
-},250);
+},300);
 }
 
 </script>
