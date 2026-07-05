@@ -12,8 +12,8 @@ display:flex;
 justify-content:center;
 align-items:center;
 flex-direction:column;
-background: radial-gradient(circle at top, #ff6f91, #ff4d6d, #1a1a2e);
-font-family: 'Segoe UI', sans-serif;
+background:#0d0d1a;
+font-family:sans-serif;
 overflow:hidden;
 color:white;
 }
@@ -22,62 +22,24 @@ color:white;
 .envelope{
 width:220px;
 height:140px;
-background:linear-gradient(135deg,#ff4d6d,#ff6f91);
+background:#ff4d6d;
 border-radius:15px;
 display:flex;
 justify-content:center;
 align-items:center;
 font-size:20px;
 cursor:pointer;
-box-shadow:0 20px 40px rgba(0,0,0,0.5);
-transition:0.4s;
-}
-.envelope:hover{
-transform:scale(1.1) rotate(-2deg);
+box-shadow:0 10px 40px rgba(0,0,0,0.5);
 }
 
-/* OPEN ANIMATION */
-.open{
-animation:openAnim 1s forwards;
-}
-@keyframes openAnim{
-0%{transform:scale(1);}
-100%{transform:scale(0) rotate(10deg);opacity:0;}
-}
-
-/* CARD */
+/* BOX */
 .box{
 display:none;
-margin-top:20px;
 background:rgba(255,255,255,0.1);
 padding:25px;
 border-radius:15px;
 text-align:center;
-width:340px;
-box-shadow:0 10px 40px rgba(0,0,0,0.4);
-backdrop-filter: blur(15px);
-animation:fadeIn 0.6s ease;
-}
-
-/* BUTTON */
-button{
-padding:10px 20px;
-border:none;
-border-radius:10px;
-margin:10px;
-font-size:16px;
-cursor:pointer;
-}
-
-.ha{
-background:#ff4d6d;
-color:white;
-}
-
-.yoq{
-background:#333;
-color:white;
-position:absolute;
+margin-top:20px;
 }
 
 /* RESULT */
@@ -87,60 +49,41 @@ position:absolute;
 top:50%;
 left:50%;
 transform:translate(-50%,-50%);
-background:rgba(255,255,255,0.1);
-padding:25px;
-border-radius:15px;
 width:90%;
 max-width:450px;
 height:70%;
 overflow:auto;
-backdrop-filter: blur(15px);
-box-shadow:0 20px 60px rgba(0,0,0,0.5);
+background:rgba(255,255,255,0.1);
+padding:20px;
+border-radius:15px;
 }
+
+/* BUTTON */
+button{
+padding:10px 20px;
+margin:10px;
+border:none;
+border-radius:10px;
+cursor:pointer;
+}
+.ha{background:#ff4d6d;color:white;}
+.yoq{background:#333;color:white;position:absolute;}
 
 /* TEXT */
 #text{
-white-space:pre-line;
-line-height:1.7;
-}
-
-/* ANIM */
-@keyframes fadeIn{
-from{opacity:0}
-to{opacity:1}
-}
-
-/* HEART */
-.heart{
-position:absolute;
-animation:float 5s linear infinite;
-}
-@keyframes float{
-0%{transform:translateY(0)}
-100%{transform:translateY(-800px)}
-}
-
-/* SPARK */
-.spark{
-position:absolute;
-color:white;
-font-size:10px;
-animation:spark 3s linear infinite;
-}
-@keyframes spark{
-0%{opacity:1;transform:translateY(0)}
-100%{opacity:0;transform:translateY(-300px)}
+line-height:1.6;
+font-size:17px;
 }
 </style>
 </head>
 
 <body>
 
-<audio id="music" autoplay loop>
+<audio id="music" loop>
 <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3">
 </audio>
 
-<div class="envelope" id="env" onclick="openLetter()">💌 OPEN</div>
+<div class="envelope" onclick="openLetter()">💌 OPEN</div>
 
 <div class="box" id="box">
 <p>Oxirigacha o‘qiysanmi? ❤️</p>
@@ -154,16 +97,18 @@ animation:spark 3s linear infinite;
 
 <script>
 
+/* MUSIC FIX (ENG MUHIM) */
+function playMusic(){
+let m=document.getElementById("music");
+m.currentTime = 0;
+m.play().catch(()=>{});
+}
+
+/* OPEN */
 function openLetter(){
-let e=document.getElementById("env");
-e.classList.add("open");
-
-setTimeout(()=>{
-e.style.display="none";
+playMusic(); // 🔥 shu ishlaydi
 document.getElementById("box").style.display="block";
-},800);
-
-document.getElementById("music").play();
+document.querySelector(".envelope").style.display="none";
 }
 
 /* YOQ qochadi */
@@ -180,71 +125,24 @@ document.getElementById("result").style.display="block";
 
 let msg = `Hayotim...
 
-Bilmayman bu xatni o‘qigach nima deb o‘ylaysan. Balki jahling hali ham bosilmagandir, balki menga javob ham berishni istamassan. Lekin bitta iltimosim bor: shu xatni oxirigacha o‘qib chiq.
-
-Oxirgi kunlarda shuni tushundimki, inson o‘zi uchun qadrli bo‘lgan narsani yo‘qotish xavfini his qilmaguncha uning qanchalik muhimligini to‘liq anglamas ekan. Men esa seni yo‘qotishdan qo‘rqayotganimni har kuni his qilyapman.
-
-Esingdami, biz kelajak haqida qancha gaplashardik? Birga orzu qilardik, maqsadlar qo‘yardik, bir kun kelib hammasiga erishamiz derdik. Men o‘sha orzularning birontasidan ham voz kechganim yo‘q. Faqat ularning barchasida sen bor eding va hozir ham bor.
-
-Sensiz hayot davom etayotgandek tuyuladi, lekin uning mazmuni yo‘qolgandek. Har kuni nimadir yetishmayotgandek bo‘ladi. Chunki men seni nafaqat sevgilim, balki eng yaqin insonim deb bilaman.
-
-Men mukammal emasman. Xatolar qilgan bo‘lishim mumkin. Balki seni ranjitgan gaplarim yoki harakatlarim bo‘lgandir. Buning uchun chin yuragimdan afsusdaman. Hech qachon seni hafa qilishni istamaganman. Agar vaqtni ortga qaytara olganimda, seni ranjitadigan birorta ish qilmasdim.
-
-Men boylikni ham, mashhurlikni ham, muvaffaqiyatni ham xohlayman. Lekin bularning hammasiga erishsam-u, yonimda sen bo‘lmasang, ularning qiymati men uchun juda kamayadi. Chunki baxtni men doim sen bilan bog‘laganman.
-
-Men hali ham qo‘lingdan ushlab yurishni, birga kulishni, birga sayohat qilishni, bir-birimizni har qanday vaziyatda qo‘llab-quvvatlashni va kelajakda "biz uddaladik" deb faxr bilan aytishni orzu qilaman.
-
-Iltimos, bitta janjal biz qurgan his-tuyg‘ularni, orzularni va rejalarning hammasini yo‘q qilib yubormasin. Bir-birimizni tushunishga yana bir imkon beraylik. Men o‘z ustimda ishlashga, xatolarimni to‘g‘rilashga va seni yanada ko‘proq qadrlashga tayyorman.
-
-Seni yo‘qotishni istamayman. Chunki sen oddiy inson emassan. Sen mening yuragimdan joy olgan odamsan. Va bilgin, yurakdagi odamni almashtirib bo‘lmaydi.
-
-Nima bo‘lishidan qat'i nazar, seni hurmat qilaman, qadrlayman va chin dildan yaxshi ko‘raman.
-
+Men seni yo‘qotishni istamayman.
 Men hali ham bizga ishonaman... ❤️`;
 
 type(msg);
-hearts();
-sparks();
 }
 
-/* typing */
+/* TYPE */
 function type(t){
 let i=0;
 let el=document.getElementById("text");
-el.innerHTML="";
 function write(){
 if(i<t.length){
 el.innerHTML+=t[i];
 i++;
-setTimeout(write,12);
+setTimeout(write,15);
 }
 }
 write();
-}
-
-/* hearts */
-function hearts(){
-setInterval(()=>{
-let h=document.createElement("div");
-h.innerHTML="❤️";
-h.className="heart";
-h.style.left=Math.random()*100+"vw";
-h.style.fontSize=(Math.random()*20+10)+"px";
-document.body.appendChild(h);
-setTimeout(()=>h.remove(),5000);
-},250);
-}
-
-/* sparks */
-function sparks(){
-setInterval(()=>{
-let s=document.createElement("div");
-s.innerHTML="✨";
-s.className="spark";
-s.style.left=Math.random()*100+"vw";
-document.body.appendChild(s);
-setTimeout(()=>s.remove(),3000);
-},200);
 }
 
 </script>
