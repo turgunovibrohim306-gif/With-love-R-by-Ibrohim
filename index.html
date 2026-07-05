@@ -16,8 +16,12 @@ font-family:sans-serif;
 overflow:hidden;
 }
 
-.container{text-align:center;position:relative;}
+.container{
+text-align:center;
+position:relative;
+}
 
+/* ENVELOPE */
 .envelope{
 width:220px;
 height:130px;
@@ -33,9 +37,11 @@ width:100%;
 height:100%;
 background:#ff758f;
 clip-path: polygon(0 0,50% 50%,100% 0);
-transition:0.5s;
+transition:0.6s;
+transform-origin:top;
 }
 
+/* QUESTION */
 .letter{
 display:none;
 position:absolute;
@@ -45,20 +51,25 @@ transform:translateX(-50%);
 background:white;
 padding:20px;
 border-radius:10px;
-width:250px;
+width:260px;
 }
 
 button{
 margin:10px;
-padding:10px;
+padding:10px 15px;
 border:none;
 border-radius:8px;
 cursor:pointer;
+font-size:16px;
 }
 
 .yes{background:#ff4d6d;color:white;}
-.no{position:absolute;}
 
+.no{
+position:absolute;
+}
+
+/* RESULT */
 .result{
 display:none;
 position:absolute;
@@ -72,10 +83,10 @@ width:260px;
 }
 
 #text{
-border-right:2px solid black;
 white-space:pre-line;
 }
 
+/* HEARTS */
 .heart{
 position:absolute;
 animation:float 4s linear infinite;
@@ -97,8 +108,8 @@ animation:float 4s linear infinite;
 </div>
 
 <div class="letter" id="letter">
-<h3>Bu xatni oxirigacha o‘qishga vada berasanmi?</h3>
-<button class="yes" onclick="showLove()">Yes ❤️</button>
+<h3>Bu xatni oxirigacha o‘qishga va’da berasanmi?</h3>
+<button class="yes" id="yesBtn">Yes ❤️</button>
 <button class="no" id="noBtn">No 😅</button>
 </div>
 
@@ -110,64 +121,67 @@ animation:float 4s linear infinite;
 
 <script>
 
-// open envelope
-document.getElementById("env").onclick = function(){
+// ENVELOPE OPEN
+document.getElementById("env").addEventListener("click", ()=>{
 document.getElementById("flap").style.transform="rotateX(180deg)";
+setTimeout(()=>{
 document.getElementById("letter").style.display="block";
-}
-
-// no button qochadi
-const noBtn=document.getElementById("noBtn");
-noBtn.addEventListener("mouseover",()=>{
-noBtn.style.left=Math.random()*200+"px";
-noBtn.style.top=Math.random()*100+"px";
+},300);
 });
 
-// yes bosilganda
-function showLove(){
+// NO BUTTON QOCHADI
+const noBtn = document.getElementById("noBtn");
+
+noBtn.addEventListener("mouseover", ()=>{
+noBtn.style.left = Math.random()*200 + "px";
+noBtn.style.top = Math.random()*100 + "px";
+});
+
+// YES CLICK
+document.getElementById("yesBtn").onclick = ()=>{
 document.getElementById("letter").style.display="none";
 document.getElementById("result").style.display="block";
 
 const msg = Hayotim ❤️
 
-Sen mening eng katta baxtimsan...
-Har bir kulishing yuragimni isitadi 💖
+Bilmayman bu xatni o‘qigach nima deb o‘ylaysan...
+Lekin seni yo‘qotishni istamayman 💔
 
 Seni juda qattiq sevaman ❤️;
 
 typeText(msg);
-hearts();
-}
+startHearts();
+};
 
-// typing effect
+// TYPING EFFECT
 function typeText(text){
-let i=0;
-const el=document.getElementById("text");
+let i = 0;
+const el = document.getElementById("text");
 
-function typing(){
-if(i<text.length){
-el.innerHTML+=text.charAt(i);
+function write(){
+if(i < text.length){
+el.innerHTML += text[i];
 i++;
-setTimeout(typing,40);
+setTimeout(write, 35);
 }
 }
-typing();
+write();
 }
 
-// hearts
-function hearts(){
+// HEART ANIMATION
+function startHearts(){
 setInterval(()=>{
-const h=document.createElement("div");
-h.innerHTML="❤️";
-h.className="heart";
+const heart = document.createElement("div");
+heart.className = "heart";
+heart.innerHTML = "❤️";
 
-h.style.left=Math.random()*100+"vw";
-h.style.fontSize=(Math.random()*20+10)+"px";
+heart.style.left = Math.random()*100 + "vw";
+heart.style.fontSize = (Math.random()*20 + 10) + "px";
 
-document.body.appendChild(h);
+document.body.appendChild(heart);
 
-setTimeout(()=>h.remove(),4000);
-},300);
+setTimeout(()=>heart.remove(),4000);
+},250);
 }
 
 </script>
